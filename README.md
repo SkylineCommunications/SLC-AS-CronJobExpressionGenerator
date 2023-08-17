@@ -25,7 +25,89 @@ These fields are separated by whitespace can be any of the characters are descri
 |*| Used to indicate every possible allowed value for the field | |
 |/| Used to indicate intervals  | * * */2 * * to indicate every other day|
 
-## 2. Using the Cron Expression Generator
+## 2. Running the script
+This section will provide 2 examples of how to run the script; from another Automation Script and from a protocol.
+
+### 2.1 From a QAction in a protocol
+```cs
+using System;
+using Skyline.DataMiner.Net.Messages;
+using Skyline.DataMiner.Scripting;
+using Parameter = Skyline.DataMiner.Scripting.Parameter;
+
+/// <summary>
+/// DataMiner QAction Class.
+/// </summary>
+public static class QAction
+{
+    /// <summary>
+    /// The QAction entry point.
+    /// </summary>
+    /// <param name="protocol">Link with SLProtocol process.</param>
+    public static void Run(SLProtocolExt protocol)
+    {
+        try
+        {
+            // Create a string[] with chosen script settings
+            string[] scriptOptions = { "DEFER:FALSE" }; // For e.g. DEFER:FALSE will launch the script immediately
+
+            // Create a new ExecuteScriptMessage object to run the script from
+            ExecuteScriptMessage message = new ExecuteScriptMessage
+            {
+                ScriptName = "Cron Expression Generator",
+                Options = new SA(scriptOptions),
+            };
+
+            // Run the Script
+            var res = protocol.ExecuteScript(message);
+            
+            // Get the final Cron expression from ScriptOutput dictionary with the key "cron"
+            var output = res.ScriptOutput;
+            string cron = string.Empty;
+            var valid = output.TryGetValue("cron", out cron);
+
+            // Automatically fill some parameter with the cron expression
+            protocol.SetParameter(Parameter.cronexpression_1, cron);
+        }
+        catch (Exception ex)
+        {
+            protocol.Log($"QA{protocol.QActionID}|{protocol.GetTriggerParameter()}|Run|Exception thrown:{Environment.NewLine}{ex}", LogType.Error, LogLevel.NoLogging);
+        }
+    }
+}
+```
+
+### 2.2 From another Automation Script
+
+```cs
+using Skyline.DataMiner.Automation;
+
+/// <summary>
+/// DataMiner Script Class.
+/// </summary>
+public class Script
+{
+	/// <summary>
+	/// The Script entry point.
+	/// </summary>
+	/// <param name="engine">Link with SLAutomation process.</param>
+	public void Run(Engine engine)
+	{
+		// Prepare a subscript
+		SubScriptOptions subScript = engine.PrepareSubScript("Cron Expression Generator");
+
+		// Launch the script
+		subScript.StartScript();
+
+		// Get the script result
+		var scriptResult = subScript.GetScriptResult();
+		var valid = scriptResult.TryGetValue("cron", out string cron);
+	}
+}
+```
+
+
+## 3. Using the Cron Expression Generator
 This section will guide you through using the Cron Expression Generator.
 
 ### Configuring the Minutes Field
