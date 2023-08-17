@@ -112,6 +112,7 @@ This section will guide you through using the Cron Expression Generator.
 
 ### Configuring the Minutes Field
 ![](/Assets/ConfigureMins.jpg)
+
 The **CONFIGURE MINS** section consists of 2 required values and 1 optional value.
 The first 2 sliders are required and represent the starting and ending minutes of the schedule.
 Selecting a starting value such as 15 and an ending value such as 30 would result in a *15-30* in the cron expression.
@@ -129,6 +130,7 @@ This means *every 2 mins, starting from 15 to 30mins past the hr*.
 
 ### Configuring the Hours Field
 ![](/Assets/ConfigureHours.jpg)
+
 The **CONFIGURE HOURS** section is similar to the **CONFIGURE MINS** field above and consists of 2 required values and 1 optional value.
 The first 2 sliders are required and represent the starting and ending hours of the schedule.
 Selecting a starting value such as 10 and an ending value such as 15 would result in a *10-15* in the cron expression.
@@ -147,6 +149,7 @@ This means *every 2 hours, starting from 10:00AM and ending at 3:59:PM*.
 
 ### Configuring the Days of the Month Field
 ![](/Assets/ConfigureDays.jpg)
+
 The **CONFIGURE DAYS** section provides two options; selecting the days individually or setting an interval schedule.
 Selecting the days individually gives more control over which dates to run the task, e.g. selecting 15 would run the task on the 15th of every month.
 Selecting an interval would give more control over the frequency of the task.
@@ -161,6 +164,7 @@ Selecting an interval of 3 would result in **/3* which means *every 3 days*.
 
 ### Configuring the Months of the Year Field
 ![](/Assets/ConfigureMonths.jpg)
+
 The **CONFIGURE MONTHS** section is similar to the **CONFIGURE DAYS** section in that it also provides two options; selecting the months individually or setting an interval schedule.
 Selecting the months individually gives more control over which months to run the task, e.g. selecting Jan and Dec would run the task only in January and Decemeber.
 Selecting an interval would give more control over the frequency of the task, e.g. selecting 3 would run the task quarterly.
@@ -175,6 +179,7 @@ Selecting an interval of 3 would result in **/3* which means *every 3 months* or
 
 ### Configuring the Days of the Week Field
 ![](/Assets/ConfigureWeeks.jpg)
+
 The **CONFIGURE DAYS OF THE WEEK** section requires you to select the days in the week that the task should run.
 
 For example, to have a task only run on the weekends, you can select sat and sun. 
@@ -182,6 +187,7 @@ This will result in an expression *6,7* that would mean *every sat and sun*.
 
 ### Generating the Cron Expression
 ![](/Assets/GenerateCron.jpg)
+
 Once all fields have been configured, you may press the **Generate Cron** button.
 The Cron expression corresponding to the set fields will be generated in the textbox under **CRON EXPRESSION**.
 A general explanation of the cron expression will also be generated under the **CRON FEEDBACK** field.
