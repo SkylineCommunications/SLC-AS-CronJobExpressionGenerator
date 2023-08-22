@@ -11,7 +11,6 @@
     {
         public ConfigureCronView(Engine engine) : base(engine)
         {
-            this.AllowOverlappingWidgets = true;
             this.Title = "Generate Cron Expression";
             this.NextButton = new Button("Finish");
             this.GenerateButton = new Button("Generate Cron");
